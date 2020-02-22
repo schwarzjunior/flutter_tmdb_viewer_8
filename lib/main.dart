@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/blocs/bottom_app_bar_bloc/bottom_app_bar_bloc.dart';
-import 'package:tmdb_viewer_8/blocs/dynamic_theme/dynamic_theme_bloc.dart';
 import 'package:tmdb_viewer_8/blocs/favorites/favorites_bloc.dart';
 import 'package:tmdb_viewer_8/blocs/trending/trending_bloc.dart';
 import 'package:tmdb_viewer_8/global/app_themes.dart';
@@ -18,15 +17,16 @@ void main() {
   );
   Intl.defaultLocale = 'pt_BR';
   initializeDateFormatting(Intl.defaultLocale).then((_) {
-    final DynamicThemeController dynamicThemeController = DynamicThemeController();
-    runApp(MyApp(themeController: dynamicThemeController));
+    // final DynamicThemeController dynamicThemeController = DynamicThemeController();
+    // runApp(TmdbViewer8App(themeController: dynamicThemeController));
+    runApp(TmdbViewer8App());
   });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key key, this.themeController}) : super(key: key);
+class TmdbViewer8App extends StatelessWidget {
+  const TmdbViewer8App({Key key}) : super(key: key);
 
-  final DynamicThemeController themeController;
+  // final DynamicThemeController themeController;
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +44,24 @@ class MyApp extends StatelessWidget {
           create: (_) => TrendingBloc(),
           dispose: (context, value) => value.dispose(),
         ),
-        /*Provider<DynamicThemeBloc>(
-          create: (_) => DynamicThemeBloc(),
-          dispose: (context, value) => value.dispose(),
-        ),*/
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'TMDb Viewer 8',
-        theme: theme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.system,
-        home: StartScreen(),
-      ),
+      child: MaterialMainApp(),
+    );
+  }
+}
+
+class MaterialMainApp extends StatelessWidget {
+  const MaterialMainApp({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'TMDb Viewer 8',
+      theme: theme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
+      home: StartScreen(),
     );
   }
 }

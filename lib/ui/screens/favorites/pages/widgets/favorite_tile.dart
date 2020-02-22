@@ -7,6 +7,7 @@ import 'package:tmdb_viewer_8/helpers/tmdb_helpers.dart';
 import 'package:tmdb_viewer_8/models/tmdb_media_item.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/movie/movie_details_page.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/person/person_details_page.dart';
+import 'package:tmdb_viewer_8/ui/screens/details/tv/tv_details_page.dart';
 
 class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelpers {
   const FavoritesTile({
@@ -22,6 +23,7 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
 
   @override
   Widget build(BuildContext context) {
+    // Colors.grey;
     return Dismissible(
       dragStartBehavior: DragStartBehavior.down,
       key: UniqueKey(),
@@ -75,7 +77,8 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
                       Text(
                         capitalizeFirstLetter(enumValueToString(mediaItem.mediaType)),
                         style: Theme.of(context).textTheme.subtitle.copyWith(
-                              color: Theme.of(context).textTheme.subtitle.color.withOpacity(0.6),
+                              color:
+                                  Theme.of(context).textTheme.subtitle.color.withOpacity(0.6),
                             ),
                       ),
                     ],
@@ -92,13 +95,11 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
   Widget _getMediaItemPage() {
     switch (mediaItem.mediaType) {
       case TmdbMediaType.movie:
-//        return null;
         return MovieDetailsPage(mediaItem.id);
       case TmdbMediaType.tv:
-        return null;
-      //return TvDetailsPage(mediaItem.id);
+        // return null;
+        return TvDetailsPage(mediaItem.id);
       case TmdbMediaType.person:
-//        return null;
         return PersonDetailsPage(mediaItem.id);
       case TmdbMediaType.other:
       default:
@@ -109,8 +110,8 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
   Future<bool> _confirmDismissDialog(BuildContext context, DismissDirection direction) async {
     final TextStyle titleTextStyle =
         Theme.of(context)?.dialogTheme?.titleTextStyle ?? Theme.of(context).textTheme.title;
-    final TextStyle contentTextStyle =
-        Theme.of(context)?.dialogTheme?.contentTextStyle ?? Theme.of(context).textTheme.subhead;
+    final TextStyle contentTextStyle = Theme.of(context)?.dialogTheme?.contentTextStyle ??
+        Theme.of(context).textTheme.subhead;
 
     final bool result = await showDialog<bool>(
       context: context,

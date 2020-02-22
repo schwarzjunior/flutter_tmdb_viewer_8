@@ -4,10 +4,18 @@ import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/global/app_defaults.dart';
 import 'package:tmdb_viewer_8/helpers/tmdb_helpers.dart';
 import 'package:tmdb_viewer_8/models/tmdb_media_item.dart';
+import 'package:tmdb_viewer_8/ui/common/widgets/custom_expansio_tile.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/base/delegates/media_details_sliver_delegate.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/base/media_details_page_mixin.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/movie/widgets/movie_cast_card.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/movie/widgets/movie_crew_card.dart';
+
+class Entry {
+  Entry(this.title, [this.children = const <Widget>[]]);
+
+  final String title;
+  final List<Widget> children;
+}
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage(this.id, {Key key}) : super(key: key);
@@ -32,26 +40,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage>
   }
 
   Widget _buildVideosList(List<MovieVideo> videos) {
-    return SchExpansionTile(
-      margin: const EdgeInsets.only(top: 26.0),
-      contentPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 8.0, 16.0),
-      decoration: schExpansionTileDecoration,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+    return Padding(
+      padding: const EdgeInsets.only(top: 26.0),
+      child: CustomExpansionTile(
+        contentPadding: const EdgeInsets.all(16.0),
+        decoration: getCustomExpansionTileDecoration(context),
+        title: 'Videos',
+        titleStyle: customExpansionTileTitleStyle,
         children: <Widget>[
-          Text(
-            'Videos',
-            style: textTheme.subhead.copyWith(
-              letterSpacing: 0.2,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          _MovieVideosList(videos: videos, includeHeader: false),
         ],
       ),
-      children: <Widget>[
-        _MovieVideosList(videos: videos, includeHeader: false),
-      ],
     );
   }
 
@@ -93,7 +92,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage>
   Widget _buildCrew() {
     List<MovieCrew> crew = _filterList<MovieCrew>(details.credits.crew);
     final int maxItemIndex = 30.clamp(0, crew.length);
-    List<Widget> items = crew.getRange(0, maxItemIndex).map((MovieCrew crew) => MovieCrewCard(crew)).toList();
+    List<Widget> items =
+        crew.getRange(0, maxItemIndex).map((MovieCrew crew) => MovieCrewCard(crew)).toList();
 
     return CustomScrollView(
       shrinkWrap: true,

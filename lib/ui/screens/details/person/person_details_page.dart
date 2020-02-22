@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sch_widgets/flutter_sch_widgets.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/global/app_defaults.dart';
 import 'package:tmdb_viewer_8/helpers/tmdb_helpers.dart';
 import 'package:tmdb_viewer_8/models/tmdb_media_item.dart';
+import 'package:tmdb_viewer_8/ui/common/widgets/custom_expansio_tile.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/base/delegates/media_details_sliver_delegate.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/base/media_details_page_mixin.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/person/widgets/credit_card.dart';
@@ -32,18 +32,18 @@ class _PersonDetailsPageState extends State<PersonDetailsPage>
   }
 
   Widget _buildBiography() {
-    if (details.biography == null || details.biography.isEmpty) return null;
+    if ((details?.biography ?? '').isEmpty) return null;
 
-    return SchExpansionTile(
-      margin: const EdgeInsets.only(top: 26.0),
-      contentPadding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 16.0),
-      decoration: schExpansionTileDecoration,
-      title: Text('Biography', style: textTheme.subhead),
+    return CustomExpansionTile(
+      contentPadding: const EdgeInsets.all(16.0),
+      decoration: getCustomExpansionTileDecoration(context),
+      title: 'Biography',
+      titleStyle: customExpansionTileTitleStyle,
       children: <Widget>[
         Text(
           details.biography,
           textAlign: TextAlign.justify,
-          style: textTheme.body2,
+          style: textTheme.body1,
         ),
       ],
     );
@@ -59,6 +59,7 @@ class _PersonDetailsPageState extends State<PersonDetailsPage>
     }).toList();
 
     return <Widget>[
+      vertSpacer(),
       Padding(
         padding: const EdgeInsets.only(left: 4.0, bottom: 6.0),
         child: Text(
@@ -130,12 +131,12 @@ class _PersonDetailsPageState extends State<PersonDetailsPage>
         infoLine('Place of birth:', details.placeOfBirth, errorText: 'Não disponível'),
         divider(),
       ])
-      ..addAll(
-        _buildCredits(),
-      )
       ..addAll([
         _buildBiography(),
-      ]);
+      ])
+      ..addAll(
+        _buildCredits(),
+      );
 
     return items;
   }

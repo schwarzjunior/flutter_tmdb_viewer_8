@@ -24,7 +24,7 @@ mixin MediaDetailsPageMixin<V, T extends StatefulWidget> on State<T> {
   @override
   void didChangeDependencies() {
     this._favoritesBloc ??= Provider.of<FavoritesBloc>(context);
-    this._textTheme ??= Theme.of(context).textTheme;
+    this._textTheme = Theme.of(context).textTheme;
     super.didChangeDependencies();
   }
 
