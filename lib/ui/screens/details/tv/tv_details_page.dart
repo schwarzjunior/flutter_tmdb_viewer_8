@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sch_widgets/flutter_sch_widgets.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/global/app_defaults.dart';
 import 'package:tmdb_viewer_8/helpers/tmdb_helpers.dart';
@@ -7,6 +6,7 @@ import 'package:tmdb_viewer_8/models/tmdb_media_item.dart';
 import 'package:tmdb_viewer_8/ui/common/widgets/custom_expansio_tile.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/base/delegates/media_details_sliver_delegate.dart';
 import 'package:tmdb_viewer_8/ui/screens/details/base/media_details_page_mixin.dart';
+import 'package:tmdb_viewer_8/ui/screens/details/tv/tv_season_details_page.dart';
 
 class TvDetailsPage extends StatefulWidget {
   const TvDetailsPage(this.id, {Key key}) : super(key: key);
@@ -105,7 +105,7 @@ class _TvDetailsPageState extends State<TvDetailsPage>
             return InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => Container(),
+                  builder: (context) => TvSeasonDetailsPage(details, season.seasonNumber),
                 ));
               },
               child: Row(

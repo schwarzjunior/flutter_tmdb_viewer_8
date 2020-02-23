@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/models/tmdb_media_item.dart';
 import 'package:tmdb_viewer_8/ui/common/media_tile/base/media_tile_base.dart';
+import 'package:tmdb_viewer_8/ui/screens/details/tv/tv_details_page.dart';
 
 class TrendingTvTile extends MediaTileBase {
   TrendingTvTile(this.tv, {Key key})
@@ -21,6 +22,8 @@ class TrendingTvTile extends MediaTileBase {
 
   @override
   openDetails(BuildContext context) {
-    return null;
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => TvDetailsPage(tv.id),
+    ));
   }
 }
