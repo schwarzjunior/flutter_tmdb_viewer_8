@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tmdb_viewer_8/blocs/bottom_app_bar_bloc/bottom_app_bar_bloc.dart';
 import 'package:tmdb_viewer_8/ui/common/custom_bottom_app_bar/custom_bottom_app_bar.dart';
 import 'package:tmdb_viewer_8/ui/screens/favorites/favorites_screen.dart';
+import 'package:tmdb_viewer_8/ui/screens/search/search_screen.dart';
 import 'package:tmdb_viewer_8/ui/screens/trending/trending_screen.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -47,14 +48,7 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           TrendingScreen(),
-          Container(
-            color: Colors.purple,
-            child: Center(
-                child: Text(
-              'Search Screen',
-              style: Theme.of(context).textTheme.display1.copyWith(color: Colors.white),
-            )),
-          ),
+          SearchScreen(),
           FavoritesScreen(),
           Container(
               color: Colors.indigo,

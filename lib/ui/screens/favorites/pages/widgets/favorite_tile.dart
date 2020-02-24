@@ -23,7 +23,7 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
 
   @override
   Widget build(BuildContext context) {
-    // Colors.grey;
+    // TODO: Use flutter_slidable package to dismiss
     return Dismissible(
       dragStartBehavior: DragStartBehavior.down,
       key: UniqueKey(),
@@ -77,8 +77,7 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
                       Text(
                         capitalizeFirstLetter(enumValueToString(mediaItem.mediaType)),
                         style: Theme.of(context).textTheme.subtitle.copyWith(
-                              color:
-                                  Theme.of(context).textTheme.subtitle.color.withOpacity(0.6),
+                              color: Theme.of(context).textTheme.subtitle.color.withOpacity(0.6),
                             ),
                       ),
                     ],
@@ -110,8 +109,8 @@ class FavoritesTile extends StatelessWidget with TmdbHelpersMixin, FormatterHelp
   Future<bool> _confirmDismissDialog(BuildContext context, DismissDirection direction) async {
     final TextStyle titleTextStyle =
         Theme.of(context)?.dialogTheme?.titleTextStyle ?? Theme.of(context).textTheme.title;
-    final TextStyle contentTextStyle = Theme.of(context)?.dialogTheme?.contentTextStyle ??
-        Theme.of(context).textTheme.subhead;
+    final TextStyle contentTextStyle =
+        Theme.of(context)?.dialogTheme?.contentTextStyle ?? Theme.of(context).textTheme.subhead;
 
     final bool result = await showDialog<bool>(
       context: context,

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/blocs/bottom_app_bar_bloc/bottom_app_bar_bloc.dart';
 import 'package:tmdb_viewer_8/blocs/favorites/favorites_bloc.dart';
+import 'package:tmdb_viewer_8/blocs/search/search_bloc.dart';
 import 'package:tmdb_viewer_8/blocs/trending/trending_bloc.dart';
 import 'package:tmdb_viewer_8/global/app_themes.dart';
 import 'package:tmdb_viewer_8/ui/screens/start/start_screen.dart';
@@ -42,6 +43,10 @@ class TmdbViewer8App extends StatelessWidget {
         ),
         Provider<TrendingBloc>(
           create: (_) => TrendingBloc(),
+          dispose: (context, value) => value.dispose(),
+        ),
+        Provider<SearchBloc>(
+          create: (_) => SearchBloc(),
           dispose: (context, value) => value.dispose(),
         ),
       ],
