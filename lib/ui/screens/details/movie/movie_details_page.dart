@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sch_widgets/flutter_sch_widgets.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:tmdb_viewer_8/global/app_defaults.dart';
+import 'package:tmdb_viewer_8/helpers/formatter_helpers.dart';
 import 'package:tmdb_viewer_8/helpers/tmdb_helpers.dart';
 import 'package:tmdb_viewer_8/models/tmdb_media_item.dart';
 import 'package:tmdb_viewer_8/ui/common/widgets/custom_expansio_tile.dart';
@@ -27,7 +28,7 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage>
-    with MediaDetailsPageMixin<Movie, MovieDetailsPage> {
+    with MediaDetailsPageMixin<Movie, MovieDetailsPage>, FormatterHelpers {
   Widget _buildOverview() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4.0, 16.0, 4.0, 0.0),
@@ -92,8 +93,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage>
   Widget _buildCrew() {
     List<MovieCrew> crew = _filterList<MovieCrew>(details.credits.crew);
     final int maxItemIndex = 30.clamp(0, crew.length);
-    List<Widget> items =
-        crew.getRange(0, maxItemIndex).map((MovieCrew crew) => MovieCrewCard(crew)).toList();
+    List<Widget> items = crew.getRange(0, maxItemIndex).map((MovieCrew crew) => MovieCrewCard(crew)).toList();
 
     return CustomScrollView(
       shrinkWrap: true,
@@ -177,8 +177,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage>
         (details.budget != null && details.budget != 0)
             ? [
                 vertSpacer(),
-//          infoLine('Budget:', formatCurrency(details.budget)),
-                infoLine('Budget:', details.budget.toString()),
+                infoLine('Budget:', formatCurrency(details.budget)),
+                // infoLine('Budget:', details.budget.toString()),
               ]
             : [],
       )

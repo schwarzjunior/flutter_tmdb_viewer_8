@@ -30,6 +30,8 @@ dependencies:
   flutter_slidable: ^0.5.4
   tmdb_api:
     path: ../_packages_2_/tmdb_api
+  flutter_money_formatter:
+    path: ../_packages_2_/flutter_money_formatter
   flutter_sch_widgets:
     path: ../_packages_/flutter_sch_widgets
 

@@ -47,10 +47,7 @@ abstract class MediaTileBase extends StatelessWidget with TmdbHelpersMixin {
                           textAlign: TextAlign.justify,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.body2.copyWith(
-                                color: Colors.grey[800],
-                                fontSize: 12.0,
-                              ),
+                          style: Theme.of(context).textTheme.body2,
                         ),
                       ],
                     ),

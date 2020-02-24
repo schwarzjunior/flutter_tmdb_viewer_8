@@ -76,6 +76,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_money_formatter:
+    dependency: "direct main"
+    description:
+      path: "..\\_packages_2_\\flutter_money_formatter"
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter_sch_widgets:
     dependency: "direct main"
     description:
