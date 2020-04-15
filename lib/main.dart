@@ -11,10 +11,15 @@ import 'package:tmdb_viewer_8/global/app_themes.dart';
 import 'package:tmdb_viewer_8/ui/screens/start/start_screen.dart';
 
 void main() {
-  TmdbApiController.init(
+  /* TmdbApiController.init(
     apiKey: 'ffea4ca1099c6f945cfe912e08056be2',
     includeAdult: true,
     language: TmdbConfigurationLanguage.pt_BR,
+  ); */
+  TmdbApiController.init(
+    apiKey: 'ffea4ca1099c6f945cfe912e08056be2',
+    includeAdult: true,
+    language: TmdbConfigurationLanguage.en_US,
   );
   Intl.defaultLocale = 'pt_BR';
   initializeDateFormatting(Intl.defaultLocale).then((_) {
